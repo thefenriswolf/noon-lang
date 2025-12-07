@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+
+    <Title>noon-lang</Title>
+    <Description>TODO</Description>
+    <Version>0.0.1</Version>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/thefenriswolf/TODO</RepositoryUrl>
+    <RootNamespace>noon_lang</RootNamespace>
+
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>.\doc\$(AssemblyName).xml</DocumentationFile>
+
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    
+    <DebugType>none</DebugType>
+    <AnalysisMode>Recommended</AnalysisMode>
+    
+    <SelfContained>true</SelfContained>
+ 
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets/qbe/qbe.bin"/>
+    <SupportedPlatform Include="linux"/>
+  </ItemGroup>
+
+</Project>
+
