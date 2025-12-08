@@ -16,6 +16,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System.CommandLine;
+//using System.CommandLine.Parsing;
 using static noonLang.Qbe;
 
 namespace noonLang;
@@ -30,6 +32,18 @@ internal static class Program
     /// </summary>
     private static void Main(string[] args)
     {
+        //https://learn.microsoft.com/en-us/dotnet/standard/commandline/get-started-tutorial
+        Option<FileInfo> fileOption = new("--file") { Description = "Input file" };
+        RootCommand rootCommand = new("Sample app for System.CommandLine");
+        rootCommand.Options.Add(fileOption);
+        rootCommand.SetAction(parseResult =>
+        {
+            FileInfo? parsedFile = parseResult.GetValue(fileOption);
+            Console.WriteLine(parsedFile);
+        });
+        ParseResult parseResult = rootCommand.Parse(args);
+        parseResult.Invoke();
+
         /// @todo read source file
         deployBackendCompiler("build");
         runBackendCompiler("build/test.ssa", "build/test.s", "test.bin");

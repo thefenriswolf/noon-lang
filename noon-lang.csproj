@@ -33,8 +33,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="assets/qbe/qbe.bin"/>
-    <SupportedPlatform Include="linux"/>
+    <EmbeddedResource Include="assets/qbe/qbe.bin" />
+    <SupportedPlatform Include="linux" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
