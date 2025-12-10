@@ -17,7 +17,7 @@
  */
 
 using System.CommandLine;
-//using System.CommandLine.Parsing;
+using System.CommandLine.Parsing;
 using static noonLang.Qbe;
 
 namespace noonLang;
@@ -32,20 +32,39 @@ internal static class Program
     /// </summary>
     private static void Main(string[] args)
     {
+        parseArgs(args);
+    }
+
+    static void parseArgs(string[] args)
+    {
         //https://learn.microsoft.com/en-us/dotnet/standard/commandline/get-started-tutorial
-        Option<FileInfo> fileOption = new("--file") { Description = "Input file" };
-        RootCommand rootCommand = new("Sample app for System.CommandLine");
-        rootCommand.Options.Add(fileOption);
+        Option<FileInfo> inputFile = new("--file", "-f")
+        {
+            Description = "Input file",
+            Required = true,
+        };
+        Option<string> outputFile = new("--output", "-o")
+        {
+            Description = "Output file",
+            Required = false,
+        };
+        RootCommand rootCommand = new("noon-lang compiler");
+        rootCommand.Options.Add(inputFile);
+        rootCommand.Options.Add(outputFile);
         rootCommand.SetAction(parseResult =>
         {
-            FileInfo? parsedFile = parseResult.GetValue(fileOption);
-            Console.WriteLine(parsedFile);
+            FileInfo? inFile = parseResult.GetValue(inputFile);
+            string IF = "";
+            if (inFile is not null)
+            {
+                IF = inFile.ToString();
+            }
+            string outFile = parseResult.GetValue(outputFile) ?? "a.out";
+            /// @todo read source file
+            deployBackendCompiler("build");
+            runBackendCompiler(IF, outFile);
         });
         ParseResult parseResult = rootCommand.Parse(args);
         parseResult.Invoke();
-
-        /// @todo read source file
-        deployBackendCompiler("build");
-        runBackendCompiler("build/test.ssa", "build/test.s", "test.bin");
     }
 }

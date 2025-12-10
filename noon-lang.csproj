@@ -9,7 +9,7 @@
     <RepositoryUrl>https://github.com/thefenriswolf/TODO</RepositoryUrl>
     <RootNamespace>noon_lang</RootNamespace>
 
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <DocumentationFile>.\doc\$(AssemblyName).xml</DocumentationFile>
 
     <OutputType>Exe</OutputType>
@@ -23,7 +23,7 @@
     <DebugType>none</DebugType>
     <AnalysisMode>Recommended</AnalysisMode>
     
-    <SelfContained>true</SelfContained>
+    <SelfContained>false</SelfContained>
  
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>

@@ -85,14 +85,13 @@ internal sealed class Qbe
     /// <summary>
     /// Run QBE on generated QBE IL file and output assembly
     /// </summary>
-    /// <param name="sourceFile">Source directory of the QBE IL file</param>
-    /// <param name="targetASMFile">Target directory for the generated assembly file</param>
+    /// <param name="sourceFile">QBE IL source file</param>
     /// <param name="targetBinFile">Target directory of the generated binary file</param>
-    public static void runBackendCompiler(string sourceFile, string targetASMFile, string targetBinFile)
+    public static void runBackendCompiler(string sourceFile, string targetBinFile)
     {
-        var qbeParams = "-o " + targetASMFile + " " + sourceFile;
+        var qbeParams = "-o " + sourceFile.Replace(".ssa", ".s") + " " + sourceFile;
         System.Diagnostics.Process.Start(Qbe.qbePath, qbeParams);
-        var ccParams = "-o " + targetBinFile + " " + targetASMFile;
+        var ccParams = "-o " + targetBinFile + " -s -O3 " + sourceFile.Replace(".ssa", ".s");
         System.Diagnostics.Process.Start("cc", ccParams);
     }
 }
